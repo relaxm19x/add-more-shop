@@ -7,7 +7,6 @@ const bodyParser = require('body-parser');
 const https = require('https'); 
 
 app.use(bodyParser.json());
-// الإصلاح الجذري والدقيق لتشغيل ملفات الواجهة بنجاح وبدون كراش
 app.use(express.static(path.join(__dirname)));
 
 const PORT = process.env.PORT || 3000;
@@ -61,6 +60,7 @@ app.post('/api/verify-order', (req, res) => {
                         smmOrderId: smmResult.order
                     });
                 } else {
+                    console.error("🚨 رفض السيرفر المعاملة:", smmResult);
                     return res.status(400).json({ 
                         success: false, 
                         message: smmResult.error || "فشل السيرفر في قبول المعاملة التلقائية." 
