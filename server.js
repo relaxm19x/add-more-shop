@@ -12,7 +12,30 @@ app.use(express.static(path.join(__dirname)));
 const PORT = process.env.PORT || 3000;
 
 // ⚠️ ضع مفتاح الـ API الخاص بك من صفحة Account في SMMGlobe مكان النص بالأسفل:
-const SMM_API_KEY = "ضع_هنا_مفتاح_الـ_API_الخاص_بكامل_من_صفحة_الـ_Account";
+const SMM_API_KEY = [
+    {
+        "service": 1,
+        "name": "Followers",
+        "type": "Default",
+        "category": "First Category",
+        "rate": "0.90",
+        "min": "50",
+        "max": "10000",
+        "refill": true,
+        "cancel": true
+    },
+    {
+        "service": 2,
+        "name": "Comments",
+        "type": "Custom Comments",
+        "category": "Second Category",
+        "rate": "8",
+        "min": "10",
+        "max": "1500",
+        "refill": false,
+        "cancel": true
+    }
+]
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
