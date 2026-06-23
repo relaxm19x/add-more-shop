@@ -1,0 +1,16 @@
+{
+  "name": "add-more-shop",
+  "version": "1.0.0",
+  "description": "متجر المنتجات والخدمات الرقمية",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
