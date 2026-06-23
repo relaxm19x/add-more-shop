@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ADD MORE SHOP - متجر الخدمات الرقمية المطور</title>
+    <!-- ربط بوابة دفع باي بال الحقيقية بمفتاحك المباشر لايف -->
+    <script src="https://www.paypal.com/sdk/js?client-id=Af-Ri4yDKZlk0Gd5Z5UdnXa8K3zd8wmWvj6_je7jzUocvVLc8coqL2hkNmksVuDqEg5c4Onxr4gjMeIS&currency=USD"></script>
+    <!-- ربط مكتبة الأيقونات الرسمية لإظهار الشعارات الحقيقية للمنصات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --brand-blue: #00f0ff; /* أزرق سماوي مضيء بدلاً من الأصفر كلياً */
+            --bg-dark: #070c0e;
+            --panel-bg: #0f181c;
+            --text-muted: #7fa4b0;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: var(--bg-dark); color: var(--white); min-height: 100vh;
+            display: flex; flex-direction: column; align-items: center; overflow-x: hidden;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        .store-header {
+            width: 100%; max-width: 480px; background: var(--panel-bg); padding: 18px;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 2px solid var(--brand-blue); position: sticky; top: 0; z-index: 1000;
+        }
+        .store-logo { font-size: 22px; font-weight: 900; color: var(--brand-blue); letter-spacing: 1px; }
+
+        .main-container { width: 100%; max-width: 480px; padding: 15px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 100px; }
+        .section-title { font-size: 16px; font-weight: bold; color: var(--white); text-align: right; margin-bottom: 5px; border-right: 4px solid var(--brand-blue); padding-right: 8px; }
+
+        .platform-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .platform-card {
+            background: var(--panel-bg); border: 2px solid rgba(0, 240, 255, 0.1); border-radius: 16px;
+            padding: 22px 15px; text-align: center; cursor: pointer; transition: all 0.2s ease;
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+        .platform-card:hover { border-color: var(--brand-blue); transform: translateY(-3px); box-shadow: 0 4px 15px rgba(0,240,255,0.2); }
+        
+        .icon-instagram { color: #e1306c; font-size: 36px; }
+        .icon-tiktok { color: #ffffff; font-size: 36px; }
+        .icon-snapchat { color: #fffc00; font-size: 36px; }
+        .icon-youtube { color: #ff0000; font-size: 36px; }
+        .icon-telegram { color: #0088cc; font-size: 36px; }
+        .icon-twitter { color: #ffffff; font-size: 36px; }
+
+        .platform-name { font-size: 14px; font-weight: bold; color: var(--white); margin-top: 4px; }
+
+        .checkout-box { background: var(--panel-bg); border-radius: 16px; border: 1px solid rgba(0, 240, 255, 0.2); padding: 20px; display: none; flex-direction: column; gap: 15px; }
+        .select-input { width: 100%; background: #0b1316; border: 1px solid #1a2f36; border-radius: 10px; padding: 14px; color: var(--white); outline: none; font-size: 14px; text-align: right; }
+        
+        .price-container { font-size: 18px; font-weight: bold; color: var(--brand-blue); text-align: right; background: #0b1316; padding: 12px; border-radius: 10px; border-right: 3px solid var(--brand-blue); }
+
+        .social-connect-box { background: var(--panel-bg); border-radius: 14px; padding: 15px; display: flex; flex-direction: column; gap: 10px; }
+        .btn-social { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; padding: 12px; border-radius: 10px; text-decoration: none; font-size: 14px; font-weight: bold; color: #fff; }
+        .btn-whatsapp { background: #25d366; }
+        .btn-instagram { background: #ca265f; }
+
+        .secure-pay-badge { display: flex; justify-content: center; gap: 10px; align-items: center; background: #0b1316; padding: 12px; border-radius: 10px; font-size: 12px; color: var(--text-muted); }
+
+        .bottom-nav-bar {
+            width: 100%; max-width: 480px; background: var(--panel-bg); position: fixed; bottom: 0;
+            display: flex; justify-content: space-around; padding: 12px 0; border-top: 1px solid #142327; z-index: 1000;
+        }
+        .nav-item-btn { background: none; border: none; color: var(--text-muted); font-size: 12px; font-weight: bold; cursor: pointer; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <div class="store-header">
+        <div class="store-logo">ADD MORE SHOP</div>
+        <div style="font-size: 12px; color: var(--brand-blue); font-weight: bold;"><i class="fa-solid fa-bolt"></i> تنفيذ تلقائي فوري</div>
+    </div>
+
+    <div class="main-container">
+        
+        <div id="section-categories">
+            <div class="section-title">الأقسام والخدمات المتكاملة</div>
+            <div class="platform-grid" style="margin-top: 12px;">
+                <div class="platform-card" onclick="selectPlatform('إنستغرام', 'instagram')">
+                    <i class="fa-brands fa-instagram icon-instagram"></i>
+                    <span class="platform-name">INSTAGRAM</span>
+                </div>
+                <div class="platform-card" onclick="selectPlatform('تيك توك', 'tiktok')">
+                    <i class="fa-brands fa-tiktok icon-tiktok"></i>
+                    <span class="platform-name">TIKTOK</span>
+                </div>
+                <div class="platform-card" onclick="selectPlatform('سناب شات', 'snapchat')">
+                    <i class="fa-brands fa-snapchat icon-snapchat"></i>
+                    <span class="platform-name">SNAPCHAT</span>
+                </div>
+                <div class="platform-card" onclick="selectPlatform('يوتيوب', 'youtube')">
+                    <i class="fa-brands fa-youtube icon-youtube"></i>
+                    <span class="platform-name">YOUTUBE</span>
+                </div>
+                <div class="platform-card" onclick="selectPlatform('تليغرام', 'telegram')">
+                    <i class="fa-brands fa-telegram icon-telegram"></i>
+                    <span class="platform-name">TELEGRAM</span>
+                </div>
+                <div class="platform-card" onclick="selectPlatform('منصة إكس / تويتر', 'twitter')">
+                    <i class="fa-brands fa-x-twitter icon-twitter"></i>
+                    <span class="platform-name">X / TWITTER</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="checkout-box" id="checkout-panel">
+            <div class="section-title" id="checkout-title">طلب الخدمة الرقمية</div>
+            
+            <label style="font-size: 12px; color: var(--text-muted); font-weight: bold;">اختر نوع باقة الخدمة المحددة بدقة:</label>
+            <select class="select-input" id="package-selector" onchange="updatePackagePrice()">
+                <!-- شحن الخيارات ديناميكياً -->
+            </select>
+
+            <div class="price-container">
+                السعر الإجمالي النهائي: <span id="package-price-lbl">0.00</span> $
+            </div>
+
+            <label style="font-size: 12px; color: var(--text-muted); font-weight: bold;">أدخل رابط الحساب أو رابط المنشور المستهدف:</label>
+            <input type="text" id="target-account-link" class="select-input" style="direction: ltr;" placeholder="https://example.com/profile">
+
+            <div style="margin-top: 10px;" id="paypal-button-container"></div>
+
+            <div class="secure-pay-badge">
+                <i class="fa-solid fa-shield-halved" style="color: var(--brand-blue);"></i>
+                <span>بوابة دفع آمنة ومشفرة بالكامل بالـ API</span>
+            </div>
+        </div>
+
+        <div>
+            <div class="section-title">قنوات التواصل والدعم الفني المباشر</div>
+            <div class="social-connect-box" style="margin-top: 12px;">
+                <a href="https://wa.me/96551367800" target="_blank" class="btn-social btn-whatsapp">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 20px;"></i>
+                    تواصل معنا عبر الواتساب المباشر
+                </a>
+                <a href="https://instagram.com/add.more.q8" target="_blank" class="btn-social btn-instagram">
+                    <i class="fa-brands fa-instagram" style="font-size: 20px;"></i>
+                    تابع حسابنا الرسمي على إنستغرام
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bottom-nav-bar">
+        <button class="nav-item-btn nav-active"><i class="fa-solid fa-house" style="color: var(--brand-blue);"></i><br>الرئيسية</button>
+        <button class="nav-item-btn" onclick="alert('السلة فارغة، اختر خدمة أولاً!')"><i class="fa-solid fa-basket-shopping"></i><br>السلة</button>
+    </div>
+
+<script>
+    const packagesData = {
+        tiktok: [
+            { name: "👤 زيادة 1000 متابع تيك توك ثابت وضمان - 2.99$", price: 2.99, smmId: 1, quantity: 1000 },
+            { name: "❤️ زيادة 5000 إعجاب / لايك سريع للفيديو - 4.50$", price: 4.50, smmId: 2, quantity: 5000 },
+            { name: "👁️ زيادة 10,000 مشاهدة سريعة للفيديو - 1.50$", price: 1.50, smmId: 3, quantity: 10000 },
+            { name: "💬 100 تعليق مخصص ومكتوب لحسابك - 2.99$", price: 2.99, smmId: 4, quantity: 100 }
+        ],
+        instagram: [
+            { name: "📸 زيادة 1000 متابع إنستغرام جودة عالية وثبات - 3.49$", price: 3.49, smmId: 5, quantity: 1000 },
+            { name: "🔥 زيادة 2000 لايك لمنشورات أو ريلز إنستغرام - 1.99$", price: 1.99, smmId: 6, quantity: 2000 },
+            { name: "👁️ زيادة 5000 مشاهدة فيديو ريلز دقة فورية - 1.20$", price: 1.20, smmId: 7, quantity: 5000 }
+        ],
+        snapchat: [
+            { name: "💛 زيادة 1000 متابع ملف تعريفي سناب شات - 5.99$", price: 5.99, smmId: 8, quantity: 1000 },
+            { name: "🔥 زيادة 5000 مشاهدة لقصص / ستوري سناب - 7.99$", price: 7.99, smmId: 9, quantity: 5000 }
+        ],
+        youtube: [
+            { name: "📺 زيادة 1000 مشترك يوتيوب حقيقي دائم وضمان - 12.00$", price: 12.00, smmId: 10, quantity: 1000 },
+            { name: "👍 زيادة 1000 لايك لفيديو يوتيوب مخصص - 3.50$", price: 3.50, smmId: 11, quantity: 1000 },
+            { name: "⏱️ 1000 ساعة مشاهدة حقيقية لتفعيل تحقيق الربح - 15.00$", price: 15.00, smmId: 12, quantity: 1000 }
+        ],
+        telegram: [
+            { name: "🔹 زيادة 1000 عضو لقناة أو جروب تليغرام - 2.49$", price: 2.49, smmId: 13, quantity: 1000 },
+            { name: "👁️ 5000 مشاهدة لآخر منشورات القناة - 1.00$", price: 1.00, smmId: 14, quantity: 5000 }
+        ],
+        twitter: [
+            { name: "🐦 زيادة 1000 متابع تويتر / إكس حسابات موثوقة - 4.99$", price: 4.99, smmId: 15, quantity: 1000 },
+            { name: "🔄 500 إعادة تغريد / ريتويت لمنشورك - 2.99$", price: 2.99, smmId: 16, quantity: 500 },
+            { name: "🗳️ 1000 صوت في استفتاءات وتصويت تويتر - 3.49$", price: 3.49, smmId: 17, quantity: 1000 }
+        ]
+    };
+
+    let selectedPackage = null;
+
+    function selectPlatform(name, key) {
+        document.getElementById('checkout-title').innerText = `باقات خدمات ${name} الشاملة`;
+        const selector = document.getElementById('package-selector');
+        selector.innerHTML = "";
+        
+        packagesData[key].forEach(p => {
+            selector.innerHTML += `<option value="${p.price}" data-smm="${p.smmId}" data-qty="${p.quantity}">${p.name}</option>`;
+        });
+
+        document.getElementById('checkout-panel').style.display = 'flex';
+        updatePackagePrice();
+        setupPayPalButtons();
+        document.getElementById('checkout-panel').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updatePackagePrice() {
+        const selector = document.getElementById('package-selector');
+        const price = selector.value;
+        document.getElementById('package-price-lbl').innerText = parseFloat(price).toFixed(2);
+        
+        const selectedOption = selector.options[selector.selectedIndex];
+        selectedPackage = {
+            price: price,
+            smmServiceId: selectedOption.getAttribute('data-smm'),
+            quantity: selectedOption.getAttribute('data-qty')
+        };
+    }
+
+    function setupPayPalButtons() {
+        document.getElementById('paypal-button-container').innerHTML = "";
+        
+        paypal.Buttons({
+            createOrder: function(data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: { value: document.getElementById('package-price-lbl').innerText }
+                    }]
+                });
+            },
+            onApprove: function(data, actions) {
+                const targetLink = document.getElementById('target-account-link').value.trim();
+                if(!targetLink) {
+                    alert("🚨 يرجى إدخال الرابط أولاً قبل إتمام الدفع!");
+                    return;
+                }
+                return actions.order.capture().then(function(details) {
+                    fetch('/api/verify-order', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            orderID: data.orderID,
+                            serviceDetails: selectedPackage,
+                            targetLink: targetLink
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(resData => {
+                        if(resData.success) {
+                            alert(`🎉 تم نجاح العملية وتمرير طلبك الرقمي آلياً بنجاح!\nرقم المعاملة: ${resData.smmOrderId}`);
+                        } else {
+                            alert(`⚠️ تم استقبال المال ولكن فشل التمرير التلقائي: ${resData.message}`);
+                        }
+                    });
+                });
+            }
+        }).render('#paypal-button-container');
+    }
+</script>
+</body>
+</html>
