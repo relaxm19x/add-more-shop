@@ -1,41 +1,18 @@
-// server.js - الباكيند المستقر والنهائي لمتجر ADD MORE SHOP كلياً
+// server.js - الإصلاح الإمبراطوري النهائي لمتجر ADD MORE SHOP
 const express = require('express');
 const app = express();
 const http = require('http').createServer(app);
 const path = require('path');
-const bodyParser = require('body-parser');
 const https = require('https'); 
 
-app.use(bodyParser.json());
+// الاعتماد على معالج البيانات المدمج في express كلياً لتفادي خطأ missing modules
+app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
 const PORT = process.env.PORT || 3000;
 
 // ⚠️ ضع مفتاح الـ API الخاص بك من صفحة Account في SMMGlobe مكان النص بالأسفل:
-const SMM_API_KEY = [
-    {
-        "service": 1,
-        "name": "Followers",
-        "type": "Default",
-        "category": "First Category",
-        "rate": "0.90",
-        "min": "50",
-        "max": "10000",
-        "refill": true,
-        "cancel": true
-    },
-    {
-        "service": 2,
-        "name": "Comments",
-        "type": "Custom Comments",
-        "category": "Second Category",
-        "rate": "8",
-        "min": "10",
-        "max": "1500",
-        "refill": false,
-        "cancel": true
-    }
-]
+const SMM_API_KEY = "ضع_هنا_مفتاح_الـ_API_الخاص_بكامل_من_صفحة_الـ_Account";
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
@@ -76,14 +53,13 @@ app.post('/api/verify-order', (req, res) => {
             try {
                 const smmResult = JSON.parse(data);
                 if (smmResult && smmResult.order) {
-                    console.log(`✅ تم قبول الطلب آلياً برقم: ${smmResult.order}`);
+                    console.log(`✅ تم قبول الطلب آلياً ورقم المعاملة: ${smmResult.order}`);
                     return res.json({ 
                         success: true, 
                         message: "تم تمرير الطلب التلقائي بنجاح الحين!",
                         smmOrderId: smmResult.order
                     });
                 } else {
-                    console.error("🚨 رفض السيرفر المعاملة:", smmResult);
                     return res.status(400).json({ 
                         success: false, 
                         message: smmResult.error || "فشل السيرفر في قبول المعاملة التلقائية." 
